@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('./models/User');
 
 // Registration endpoint
-router.post('/', async (req, res) => {
+router.get('/register', async (req, res) => {
     const { username, password } = req.body;
 
     // Basic validation
