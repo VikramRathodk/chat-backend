@@ -11,6 +11,10 @@ connectToDatabase().catch(console.dir);
 
 app.use('/register', registerRoute);
 
+app.get('/get_users',(req,res)=>{
+    res.send("getting all users...");
+})
+
 app.get('/', (req, res) => {
     res.send("Hello world");
 });
