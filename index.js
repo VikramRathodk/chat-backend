@@ -1,7 +1,8 @@
 import express, { json } from 'express';
 import { config } from 'dotenv';
-import registerRoute from './apies/users/register.js';
-import getUsers from './apies/users/get_user.js';
+// import registerRoute from './apies/user/auth/register.js';
+// import getUsers from './apies/user/auth/get_user.js';
+import userRoutes from './apies/user/authRoutes.js'
 import connectToDatabase from './db.js'; 
 
 config();
@@ -17,8 +18,10 @@ const startServer = async () => {
     console.log('Connected to MongoDB');
 
     // Register routes
-    app.use('/register', registerRoute);
-    app.use('/users', getUsers);
+    app.use('/users', userRoutes);
+
+    // app.use('/register', registerRoute);
+    // app.use('/users', getUsers);
 
     app.get('/', (req, res) => {
       res.send('Hello world');
