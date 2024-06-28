@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.json({ token, status: true, message: "You are logged in" });
+    res.json({ "user":user, status: true, message: "You are logged in" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
