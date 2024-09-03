@@ -1,12 +1,11 @@
 import { Router } from "express";
 import User from "../../../models/User.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+
 
 const router = Router();
 
 router.post("/", async (req, res) => {
-  const { email, username, password } = req.body;
+  const { email, username, password,token } = req.body;
 
   try {
     const user = await User.findOne({ email });
@@ -21,11 +20,10 @@ router.post("/", async (req, res) => {
         .status(400)
         .json({ status: false, message: "Invalid credentials" });
     }
-    const token = jwt.sign(
-      { userId: user._id, email: user.email },
-      "your_jwt_secret",
-      { expiresIn: "1h" }
-    );
+
+    user.token = token;
+    await user.save();
+
 
     res.json({ "user":user, status: true, message: "You are logged in" });
   } catch (error) {
