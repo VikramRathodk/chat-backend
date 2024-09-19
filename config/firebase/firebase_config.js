@@ -1,13 +1,16 @@
+import admin from 'firebase-admin';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const admin = require('firebase-admin');
-const path = require('path');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const serviceAccount = require(path.resolve(__dirname, 'service_account.json'));
+const serviceAccount = JSON.parse(await Deno.readTextFile(path.resolve(__dirname, 'service_account.json')));
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
 });
 
 const db = admin.firestore();
 
-module.exports = { admin, db };
+export { admin, db };
