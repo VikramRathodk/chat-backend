@@ -1,4 +1,6 @@
 .env
 node_modules/
 
+config/firebase/service_account.json
+git-filter-repo/
 

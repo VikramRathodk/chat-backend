@@ -6,6 +6,7 @@ const router = Router();
 
 router.post("/", async (req, res) => {
   const { email, username, password,token } = req.body;
+  
 
   try {
     const user = await User.findOne({ email });
@@ -14,7 +15,6 @@ router.post("/", async (req, res) => {
     }
 
     const isMatch = password == user.password;
-    // await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res
         .status(400)
