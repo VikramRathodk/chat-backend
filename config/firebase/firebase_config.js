@@ -1,25 +1,15 @@
-import { readFileSync } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
 import admin from 'firebase-admin';
+import dotenv from 'dotenv';
 
-// Define __dirname for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
-// Path to service account JSON
-const serviceAccountPath = join(__dirname, 'service_account.json');
+dotenv.config();
 
-// Read and parse the service account JSON
-const serviceAccount = JSON.parse(readFileSync(serviceAccountPath, 'utf-8'));
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-// Initialize Firebase Admin SDK
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-// Initialize Firestore
 export const db = admin.firestore();
 
-// Export admin and db
 export default admin;
