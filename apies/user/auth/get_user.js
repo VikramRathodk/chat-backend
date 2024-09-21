@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
           .collection("conversations")
           .doc(user._id.toString())
           .collection("messages");
+        
         const messagesSnapshot = await chatRef
           .orderBy("timestamp", "desc")
           .limit(1)
@@ -25,8 +26,8 @@ router.get("/", async (req, res) => {
         }
 
         return {
-          ...user.toObject(),
-          lastMessage: latestMessage,
+          ...user.toObject(),  
+          lastMessage: latestMessage,  
         };
       })
     );
